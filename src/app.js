@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 
-const recommendationRoutes = require('./routes/recommendationRoutes')
+const recommendationRoutes = require('./routes/recommendationRoutes')()
 
 const port = process.env.PORT || 3000
 

@@ -1,19 +1,17 @@
 const express = require('express')
 
-const recommendationRepo = require('../repositories/recommendationRepository')
+const recommendationController = require('../controllers/recommendationController')
 
-const recommendationRouter = express.Router()
+const routes = () => {
+  const recommendationRouter = express.Router()
+  const controller = recommendationController();
 
-recommendationRouter.route('/')
-  .get((req, res) => {
-    const recommendations = recommendationRepo.recommendations()
-    res.json(recommendations)
-  })
-  .post((req, res) => {
-    const title = req.body.title
-    const content = req.body.content
-    const recommendation = recommendationRepo.createRecommendation(title, content)
-    res.json(recommendation)
-  })
+  recommendationRouter.route('/')
+    .get(controller.get)
+    .post(controller.post)
 
-module.exports = recommendationRouter
+  return recommendationRouter;
+}
+
+
+module.exports = routes
